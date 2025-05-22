@@ -1,7 +1,7 @@
 Summary: Library of functions for manipulating TIFF format image files
 Name: libtiff
 Version: 4.0.3
-Release: 36%{?dist}
+Release: 37%{?dist}
 
 License: libtiff
 Group: System Environment/Libraries
@@ -56,7 +56,7 @@ Patch43: libtiff-coverity.patch
 Patch44: libtiff-CVE-2019-14973.patch
 Patch45: libtiff-CVE-2019-17546.patch
 Patch46: 0036-CVE-2022-3970-TIFFReadRGBATileExt-fix-unsigned-integ.patch
-
+Patch47: CVE-2020-35524.patch
 BuildRequires: zlib-devel libjpeg-devel jbigkit-devel
 BuildRequires: libtool automake autoconf pkgconfig
 
@@ -153,7 +153,7 @@ image files using the libtiff library.
 %patch44 -p1
 %patch45 -p1
 %patch46 -p1
-
+%patch47 -p1
 # Use build system's libtool.m4, not the one in the package.
 rm -f libtool.m4
 
@@ -257,6 +257,9 @@ find html -name 'Makefile*' | xargs rm
 %{_mandir}/man1/*
 
 %changelog
+* Tue May 06 2025 Anmol Jain <ajain@ciq.com> - 4.0.3-37
+- Fix CVE-2020-35524
+
 * Wed Dec 04 2024 Pratham Patel <ppatel@ciq.com> - 4.0.3-36
 - Fix CVE-2022-3970
 
