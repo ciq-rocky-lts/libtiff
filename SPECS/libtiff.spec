@@ -1,7 +1,7 @@
 Summary:       Library of functions for manipulating TIFF format image files
 Name:          libtiff
 Version:       4.0.9
-Release:       30%{?dist}
+Release:       34%{?dist}
 License:       libtiff
 Group:         System Environment/Libraries
 URL:           http://www.simplesystems.org/libtiff/
@@ -55,6 +55,13 @@ Patch0041: 0041-CVE-2023-25433-Merge-branch-tiffcrop_correctly_updat.patch
 Patch0042: 0042-CVE-2023-52356-Merge-branch-fix_622-into-master.patch
 Patch0043: 0043-CVE-2023-6228-Merge-branch-fix_606_tiffcp_check_also.patch
 
+# from upstream, for <=4.6.0, RHEL-52927
+# https://gitlab.com/libtiff/libtiff/-/commit/3705f82b6483c7906cf08cd6b9dcdcd59c61d779
+Patch44:       libtiff-4.6.0-CVE-2024-7006.patch
+
+# from upstream, for < 4.0.10, RHEL-87363
+# https://gitlab.com/libtiff/libtiff/-/commit/9171da596c88e6a2dadcab4a3a89dddd6e1b4655
+Patch45:       libtiff-4.0.9-CVE-2017-17095.patch
 
 BuildRequires: gcc, gcc-c++
 BuildRequires: zlib-devel libjpeg-devel jbigkit-devel
@@ -208,12 +215,28 @@ find html -name 'Makefile*' | xargs rm
 %{_mandir}/man1/*
 
 %changelog
-* Tue Sep 17 2024 Pratham Patel <ppatel@ciq.com> - 4.0.9-30
-- Fix CVE-2022-3599 CVE-2018-15209 CVE-2023-25433 CVE-2023-52356 CVE-2023-6228
+* Tue Apr 22 2025 Michal Hlavinka <mhlavink@redhat.com> - 4.0.9-34
+- fix CVE-2017-17095: heap-based buffer overflow in pal2rgb (RHEL-87363)
+
+* Thu Aug 29 2024 Michal Hlavinka <mhlavink@redhat.com> - 4.0.9-33
+- fix CVE-2024-7006 a null pointer dereference in tif_dirinfo (RHEL-52927)
+
+* Thu May 16 2024 Matej Mužila <mmuzila@redhat.com> - 4.0.9-32
+- Fix CVE-2023-6228 CVE-2023-52356 CVE-2023-25433 CVE-2018-15209
+- Resolves: RHEL-30682 RHEL-30520 RHEL-30474 RHEL-5406
+
+* Fri Jan 05 2024 Matej Mužila <mmuzila@redhat.com> - 4.0.9-31
+- Fix CVE-2022-3599 CVE-2022-4645
+- Resolves: RHEL-5399
+
+* Thu Sep 21 2023 Ondrej Sloup <osloup@redhat.com> - 4.0.9-30
+- Bump specfile to retrigger gating
+- Add tests folder for standard beakerlib
+- Related: RHEL-4683 RHEL-4685 RHEL-4686 RHEL-4687 RHEL-4688
 
 * Tue Aug 08 2023 Matej Mužila <mmuzila@redhat.com> - 4.0.9-29
 - Fix CVE-2023-0800 CVE-2023-0801 CVE-2023-0802 CVE-2023-0803 CVE-2023-0804
-- Resolves: RHEL-5075 RHEL-5078 RHEL-5079 RHEL-5080 RHEL-5081
+- Resolves: RHEL-4683 RHEL-4685 RHEL-4686 RHEL-4687 RHEL-4688
 
 * Tue May 16 2023 Matej Mužila <mmuzila@redhat.com> - 4.0.9-28
 - Fix CVE-2022-48281
