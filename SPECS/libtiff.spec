@@ -1,7 +1,7 @@
 Summary: Library of functions for manipulating TIFF format image files
 Name: libtiff
 Version: 4.0.3
-Release: 37%{?dist}
+Release: 37%{?dist}.1
 
 License: libtiff
 Group: System Environment/Libraries
@@ -57,6 +57,26 @@ Patch44: libtiff-CVE-2019-14973.patch
 Patch45: libtiff-CVE-2019-17546.patch
 Patch46: 0036-CVE-2022-3970-TIFFReadRGBATileExt-fix-unsigned-integ.patch
 Patch47: CVE-2020-35524.patch
+Patch51: libtiff-CVE-2020-35523.patch
+# https://gitlab.com/libtiff/libtiff/-/merge_requests/159
+
+# Fix CVE-2023-3164
+# Patch from https://gitlab.com/libtiff/libtiff/-/commit/848434a81c443f59ec90d41218eba6e48a450a11
+Patch1012: libtiff-CVE-2023-3164.patch
+
+# Fix CVE-2023-6277
+# Patch from https://gitlab.com/libtiff/libtiff/-/merge_requests/545.patch
+Patch1013: libtiff-CVE-2023-6277.patch
+
+# Fix CVE-2024-7006
+# Patch from https://gitlab.com/libtiff/libtiff/-/commit/818fb8ce881cf839fbc710f6690aadb992aa0f9e
+Patch1014: libtiff-CVE-2024-7006.patch
+
+# Fix CVE-2023-41175
+# Patch from https://gitlab.com/libtiff/libtiff/-/commit/6e2dac5f904496d127c92ddc4e56eccfca25c2ee
+Patch1015: libtiff-CVE-2023-41175.patch
+
+
 BuildRequires: zlib-devel libjpeg-devel jbigkit-devel
 BuildRequires: libtool automake autoconf pkgconfig
 
@@ -105,55 +125,7 @@ image files using the libtiff library.
 
 %prep
 %setup -q -n tiff-%{version}
-
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
-%patch14 -p1
-%patch15 -p1
-%patch16 -p1
-%patch17 -p1
-%patch18 -p1
-%patch19 -p1
-%patch20 -p1
-%patch21 -p1
-%patch22 -p1
-%patch23 -p1
-%patch24 -p1
-%patch25 -p1
-%patch26 -p1
-%patch27 -p1
-%patch28 -p1
-%patch29 -p1
-%patch30 -p1
-%patch31 -p1
-%patch32 -p1
-%patch33 -p1
-%patch34 -p1
-%patch35 -p1
-%patch36 -p1
-%patch37 -p1
-%patch38 -p1
-%patch39 -p1
-%patch40 -p1
-%patch41 -p1
-%patch42 -p1
-%patch43 -p1
-%patch44 -p1
-%patch45 -p1
-%patch46 -p1
-%patch47 -p1
+%autopatch -p1
 # Use build system's libtool.m4, not the one in the package.
 rm -f libtool.m4
 
@@ -257,6 +229,9 @@ find html -name 'Makefile*' | xargs rm
 %{_mandir}/man1/*
 
 %changelog
+* Tue Aug 12 2025 Anmol Jain <ajain@ciq.com> - 4.0.3-37.1
+- Fix for CVE-2023-3164, CVE-2020-35523, CVE-2023-41175, CVE-2024-7006, CVE-2023-6277
+
 * Tue May 06 2025 Anmol Jain <ajain@ciq.com> - 4.0.3-37
 - Fix CVE-2020-35524
 
