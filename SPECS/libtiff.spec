@@ -1,7 +1,7 @@
 Summary: Library of functions for manipulating TIFF format image files
 Name: libtiff
 Version: 4.0.3
-Release: 37%{?dist}.1
+Release: 38%{?dist}
 
 License: libtiff
 Group: System Environment/Libraries
@@ -75,6 +75,8 @@ Patch1014: libtiff-CVE-2024-7006.patch
 # Fix CVE-2023-41175
 # Patch from https://gitlab.com/libtiff/libtiff/-/commit/6e2dac5f904496d127c92ddc4e56eccfca25c2ee
 Patch1015: libtiff-CVE-2023-41175.patch
+
+Patch2000: CVE-2025-9900.patch
 
 
 BuildRequires: zlib-devel libjpeg-devel jbigkit-devel
@@ -229,6 +231,9 @@ find html -name 'Makefile*' | xargs rm
 %{_mandir}/man1/*
 
 %changelog
+* Thu Nov 20 2025 Trinity Quirk <tquirk@ciq.com> - 4.0.3-38
+- Fix CVE-2025-9900
+
 * Tue Aug 12 2025 Anmol Jain <ajain@ciq.com> - 4.0.3-37.1
 - Fix for CVE-2023-3164, CVE-2020-35523, CVE-2023-41175, CVE-2024-7006, CVE-2023-6277
 
