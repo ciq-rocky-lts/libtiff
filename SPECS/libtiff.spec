@@ -1,7 +1,7 @@
 Summary: Library of functions for manipulating TIFF format image files
 Name: libtiff
 Version: 4.0.3
-Release: 38%{?dist}
+Release: 39%{?dist}
 
 License: libtiff
 Group: System Environment/Libraries
@@ -78,6 +78,10 @@ Patch1015: libtiff-CVE-2023-41175.patch
 
 Patch2000: CVE-2025-9900.patch
 
+# Fix CVE-2025-8177: buffer overflow in thumbnail setrow
+# Upstream fix: https://gitlab.com/libtiff/libtiff/-/commit/e8de4dc1f923576dce9d625caeebd93f9db697e1
+# Reference: https://gitlab.com/libtiff/libtiff/-/issues/715
+Patch2001: CVE-2025-8177.patch
 
 BuildRequires: zlib-devel libjpeg-devel jbigkit-devel
 BuildRequires: libtool automake autoconf pkgconfig
@@ -231,6 +235,9 @@ find html -name 'Makefile*' | xargs rm
 %{_mandir}/man1/*
 
 %changelog
+* Mon Feb 23 2026 Andrew Jorgensen <ajorgens@ciq.com> - 4.0.3-39
+- Fix CVE-2025-8177
+
 * Thu Nov 20 2025 Trinity Quirk <tquirk@ciq.com> - 4.0.3-38
 - Fix CVE-2025-9900
 
